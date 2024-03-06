@@ -21,56 +21,53 @@ import 'package:trial_v3/pages/topic_2/topic_2.dart';
 import 'package:trial_v3/pages/topic_3/topic_3.dart';
 import 'package:trial_v3/pages/settings_Page/settings_Page.dart';
 
+
 // ignore_for_file: must_be_immutable
 class BottomBarContainer extends StatelessWidget {
+
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
-  BottomBarContainer({Key? key}) : super(key: key);
+  BottomBarContainer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final boxConstraints = MediaQuery.of(context).size;
-    final orientation = MediaQuery.of(context).orientation;
-
     return SafeArea(
-      child: Scaffold(
-        //backgroundColor: ColorConstant.gray50,
-        body: Navigator(
-          key: navigatorKey,
-          initialRoute: AppRoute.home_Page,
-          onGenerateRoute: (routeSetting) => PageRouteBuilder(
-            pageBuilder: (ctx, ani, ani1) => getCurrentPage(routeSetting.name!),
-            transitionDuration: const Duration(seconds: 0),
-          ),
-        ),
-        bottomNavigationBar: Container(
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
-                spreadRadius: 5,
-                blurRadius: 7,
-                offset: Offset(0, -3),
-              ),
-            ],
-          ),
+        child: Scaffold(
+            backgroundColor: ColorConstant.gray50,
+            body: Navigator(
+                key: navigatorKey,
+                initialRoute: AppRoute.home_Page,
+                onGenerateRoute: (
+                    routeSetting
+                    ) => PageRouteBuilder(
+                    pageBuilder: (
+                        ctx,
+                        ani,
+                        ani1,
+                        ) => getCurrentPage(
+                        routeSetting.name!
+                    ),
+                    transitionDuration: const Duration(seconds: 0)
+                )
+            ),
 
-          child: CustomBottomBar(onChanged: (BottomBarEnum type) {
-            Navigator.pushNamed(navigatorKey.currentContext!, getCurrentRoute(type));
-          }),
-        ),
-      ),
+            bottomNavigationBar: CustomBottomBar(onChanged: (BottomBarEnum type) {
+              Navigator.pushNamed(
+                  navigatorKey.currentContext!, getCurrentRoute(type)
+              );
+            }
+            )
+        )
     );
   }
-
-  /// Handling route based on bottom click actions
+  ///Handling route based on bottom click actions
   String getCurrentRoute(BottomBarEnum type) {
     switch (type) {
       case BottomBarEnum.Home: return AppRoute.home_Page;
       case BottomBarEnum.Myhome: return AppRoute.next;
       case BottomBarEnum.Profile: return AppRoute.profile_Page;
 
-    // ----------------
+      // ----------------
       case BottomBarEnum.values: return AppRoute.new_next;
       case BottomBarEnum.values: return AppRoute.topic_1;
       case BottomBarEnum.values: return AppRoute.topic_2;
@@ -79,13 +76,12 @@ class BottomBarContainer extends StatelessWidget {
       case BottomBarEnum.values: return AppRoute.edit_Profile_Page;
       case BottomBarEnum.values: return AppRoute.settings_Page;
       case BottomBarEnum.values: return AppRoute.lesson_1;
-    // ----------------
+      // ----------------
 
       default: return AppRoute.home_Page;
     }
   }
-
-  /// Handling page based on route
+  ///Handling page based on route
   Widget getCurrentPage(String currentRoute) {
     switch (currentRoute) {
       case AppRoute.home_Page: return const HomePage();
@@ -93,7 +89,7 @@ class BottomBarContainer extends StatelessWidget {
       case AppRoute.next: return const next_page();
       case AppRoute.profile_Page: return const ProfilePage();
 
-    // -----------------
+      // -----------------
       case AppRoute.new_next: return const new_next_page();
       case AppRoute.topic_1: return const Topic1();
       case AppRoute.topic_2: return const Topic2();
@@ -102,7 +98,7 @@ class BottomBarContainer extends StatelessWidget {
       case AppRoute.edit_Profile_Page: return EditProfilePage();
       case AppRoute.settings_Page: return SettingsPage();
       case AppRoute.lesson_1: return Lesson1Proper();
-    // ----------------
+      // ----------------
       default: return const HomePage();
     }
   }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:trial_v3/pages/edit_Profile_Page/edit_Profile_Page.dart';
 import 'package:trial_v3/pages/topic_1/topic_1.dart';
@@ -16,6 +15,7 @@ import 'package:trial_v3/pages/others/new_next/new_next.dart';
 import 'package:trial_v3/pages/others/next_page/next_page.dart';
 import 'package:trial_v3/pages/favorite_Page/favorite_Page.dart';
 import 'package:trial_v3/pages/settings_Page/settings_Page.dart';
+import 'package:trial_v3/pages/lesson_1/lesson_1.dart';
 
 class AppRoute {
   static const String splash_Screen = '/splash_Screen';
@@ -30,6 +30,7 @@ class AppRoute {
   static const String topic_1 = '/topic_1';
   static const String topic_2 = '/topic_2';
   static const String topic_3 = '/topic_3';
+  static const String lesson_1 = '/lesson_1';
 
   static const String favorite_Page = '/favorite_Page';
   static const String edit_Profile_Page = '/edit_Profile_Page';
@@ -56,6 +57,7 @@ class AppRoute {
     topic_1: (context) => const Topic1(),
     topic_2: (context) => const Topic2(),
     topic_3: (context) => const Topic3(),
+    lesson_1: (context) => const Lesson1Proper(),
 
     favorite_Page: (context) => const FavoritePage(),
     edit_Profile_Page: (context) => EditProfilePage(),
@@ -73,3 +75,11 @@ class AppRoute {
     old_Home_Page: (context) => oldHomePage(),
   };
 }
+
+// onTapProperLesson: () {
+//   onTapProperLesson(context);
+// },
+
+// onTap: () {
+//   onTapLesson?.call();
+// },

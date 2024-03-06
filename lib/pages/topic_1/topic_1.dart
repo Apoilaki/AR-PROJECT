@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:trial_v3/pages/topic_1/widget/topic_1_Item_Widget.dart';
 import 'package:trial_v3/app_essentials/tools/app_bar/app_Bar_Subtitle.dart';
-import 'package:trial_v3/app_essentials/tools/app_bar/custom_App_Bar.dart';
+//import 'package:trial_v3/app_essentials/tools/app_bar/custom_App_Bar.dart';
 import 'package:trial_v3/app_essentials/utils/size_Utils.dart';
 import 'package:trial_v3/app_essentials/utils/color_Constant.dart';
 import 'package:trial_v3/app_essentials/routes/app_route.dart';
 import 'package:trial_v3/app_essentials/utils/image_Constants.dart';
-import 'package:trial_v3/app_essentials/tools/app_bar/app_Bar_Icon_Button_1.dart';
 import 'package:trial_v3/app_essentials/tools/app_bar/app_Bar_Logo.dart';
+import 'package:trial_v3/app_essentials/tools/app_bar2/app_Bar_2.dart';
+import 'package:trial_v3/app_essentials/tools/app_bar2/app_Bar_Leading_Image.dart';
+import 'package:trial_v3/app_essentials/theme/theme_Helper.dart';
+
 
 class Topic1 extends StatelessWidget {
   const Topic1({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -22,23 +24,24 @@ class Topic1 extends StatelessWidget {
         child: Scaffold(
           backgroundColor: ColorConstant.gray50,
 
-          appBar: CustomAppBar(
-            height: getVerticalSize(70),
-            leadingWidth: 64,
-            leading: AppBarLogo(
-              height: 100,
-              width: 100,
-              svgPath: ImageConstant.imgArrowleft,
-              margin: getPadding(
-                left: 25,
-              ),
-              onTap: () {
-                onTapArrowleft4(context);
-              }),
-
-            centerTitle: true,
-            title: AppbarSubtitle(text: "Topic 1"),
-          ),
+          // appBar: CustomAppBar(
+          //   height: getVerticalSize(70),
+          //   leadingWidth: 64,
+          //   leading: AppBarLogo(
+          //     height: 100,
+          //     width: 100,
+          //     svgPath: ImageConstant.imgArrowleft,
+          //     margin: getPadding(
+          //       left: 25,
+          //     ),
+          //     onTap: () {
+          //       onTapArrowleft4(context);
+          //     }),
+          //
+          //   centerTitle: true,
+          //   title: AppbarSubtitle(text: "Topic 1"),
+          // ),
+          appBar: _buildAppBar(context),
 
           body: Container(
             width: double.maxFinite,
@@ -49,37 +52,97 @@ class Topic1 extends StatelessWidget {
               bottom: 20,
             ),
 
+            // child: Column(
+            //   mainAxisAlignment: MainAxisAlignment.start,
+            //
+            //   children: [
+            //     ListView.separated(
+            //       physics: const NeverScrollableScrollPhysics(),
+            //       shrinkWrap: true,
+            //
+            //       separatorBuilder: (context, index) {
+            //         return SizedBox(
+            //           height: getVerticalSize(16)
+            //         );
+            //       },
+            //
+            //       itemCount: 1,
+            //       itemBuilder: (context, index) {
+            //         return Topic1ItemWidget(
+            //         );
+            //       },
+            //     ),
+            //   ],
+            // ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
-
               children: [
                 ListView.separated(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-
                   separatorBuilder: (context, index) {
-                    return SizedBox(
-                      height: getVerticalSize(16)
-                    );
-                  },
+                    return SizedBox(height: getVerticalSize(16));
+                    },
 
                   itemCount: 1,
                   itemBuilder: (context, index) {
                     return Topic1ItemWidget(
-                      onTapLesson: () {
-                        onTapLesson(context);
+                      onTapProperLesson: () {
+                        onTapProperLesson(context);
+                      },
+                      onTapModule1Activities: () {
+                        onTapModule1Activities(context);
                       },
                     );
-                  },
+                    },
                 ),
               ],
-            ),
           ),
         ),
-      //),
+      ),
     );
   }
-  onTapLesson(BuildContext context) {
+
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
+    return CustomAppBar(
+      //leadingWidth: 36.h,
+      leadingWidth: getHorizontalSize(44),
+      leading: AppbarLeadingImage(
+          imagePath: ImageConstant.imgArrowDown2,
+          margin: EdgeInsets.only(
+              left: getHorizontalSize(12),
+              top: getVerticalSize(20),
+              bottom: getVerticalSize(20)
+            // left: 12.h,
+            // top: 20.v,
+            // bottom: 20.v,
+          ),
+          onTap: () {
+            onTapArrowDown(context);
+          }),
+      centerTitle: true,
+      title: AppBarLogo(
+        height: 100,
+        width: 100,
+        imagePath: ImageConstant.imgAppBarLogo,
+        color: theme.colorScheme.primary,
+      ),
+      styleType: Style.bgFill,
+      //     actions: [
+      //   AppBarLogo(
+      //   height: 30,
+      //   width: 30,
+      //     svgPath: ImageConstant.imgOptionIcon,
+      // ),
+      // ],
+    );
+  }
+
+  onTapProperLesson(BuildContext context) {
+    Navigator.pushNamed(context, AppRoute.lesson_1);
+  }
+
+  onTapModule1Activities(BuildContext context) {
     Navigator.pushNamed(context, AppRoute.new_next);
   }
 
@@ -87,7 +150,7 @@ class Topic1 extends StatelessWidget {
     Navigator.pop(context);
   }
 
-  onTap(BuildContext context) {
-    Navigator.pop(context);
+  onTapArrowDown(BuildContext context) {
+    Navigator.pop(context,AppRoute.home_Page);
   }
 }

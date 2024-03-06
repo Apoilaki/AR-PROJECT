@@ -80,11 +80,12 @@ class ImageConstant {
   // settings
   static String imgArrowright20x20 = 'assets/images/img_arrowright_20x20.svg';
 
-  //
-
-
-
-
-
+  //LESSON 1
+  static String diagonal_f1 = 'assets/images/Curve_ball_2.png';
+  static String diagonal_f12 = 'assets/images/Sepak_Takraw_Curve.png';
+  static String imgArrowDown2 = 'assets/images/img_arrow_down.svg';
+  static String diving = 'assets/images/Man_Diving.png';
+  static String sepak = 'assets/images/SepakTakraw2.png';
+  static String letters = 'assets/images/f15_.png';
 
 }

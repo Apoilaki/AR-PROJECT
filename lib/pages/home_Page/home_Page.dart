@@ -1,309 +1,191 @@
 // fixing
 import 'package:flutter/material.dart';
 import 'package:trial_v3/app_essentials/routes/app_route.dart';
-import 'package:trial_v3/app_essentials/tools/app_bar/app_Bar_Icon_Button.dart';
-import 'package:trial_v3/app_essentials/tools/app_bar/app_Bar_Image.dart';
-import 'package:trial_v3/app_essentials/tools/app_bar/app_Bar_Subtitle.dart';
-import 'package:trial_v3/app_essentials/tools/app_bar/custom_App_Bar.dart';
-import 'package:trial_v3/app_essentials/tools/custom_Icon_Button.dart';
-import 'package:trial_v3/app_essentials/utils/color_Constant.dart';
+//import 'package:trial_v3/app_essentials/tools/app_bar/custom_App_Bar.dart';
 import 'package:trial_v3/app_essentials/utils/size_Utils.dart';
 import 'package:trial_v3/app_essentials/utils/image_Constants.dart';
-import 'package:trial_v3/app_essentials/tools/custom_Image_View.dart';
-import 'package:trial_v3/app_essentials/theme/app_Style.dart';
-import 'package:trial_v3/app_essentials/tools/app_bar/app_Bar_Image.dart';
 import 'package:trial_v3/app_essentials/tools/app_bar/app_Bar_Logo.dart';
-
+import 'package:trial_v3/pages/home_Page/widget/home_Widget.dart';
+import 'package:trial_v3/app_essentials/theme/app_Style.dart';
+import 'package:trial_v3/app_essentials/tools/app_bar2/app_Bar_2.dart';
+import 'package:trial_v3/app_essentials/tools/app_bar2/app_Bar_Leading_Image.dart';
+import 'package:trial_v3/app_essentials/theme/theme_Helper.dart';
+import 'package:trial_v3/app_essentials/utils/size_Utils_2.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      //child: Padding(
-        //padding: getPadding(top:1),
 
-        child: Scaffold(
-            backgroundColor: ColorConstant.gray50,
-            appBar: CustomAppBar(
-              height: getVerticalSize(70),
-              leadingWidth: 64,
-              //centerTitle: true,
-              title: AppBarLogo(
-                height: 100,
-                width: 100,
-                margin: getPadding(
-                  left: 25,
-                ),
-                imagePath: ImageConstant.imgAppBarLogo,
+  final size = MediaQuery.of(context).size;
+  final boxConstraints = BoxConstraints(
+  maxWidth: size.width,
+  maxHeight: size.height,
+  );
+  final orientation = MediaQuery.of(context).orientation;
 
-                onTap: () {
-                  onTapLogo(context);
-                },
+
+  return Sizer(
+  builder: (context, orientation, deviceType) {
+  SizeUtils.setScreenSize(boxConstraints, orientation);
+  return SafeArea(
+  child: Scaffold(
+  appBar: _buildAppBar(context),
+
+  body: Container(
+  width: double.maxFinite,
+  padding: EdgeInsets.only(
+  top: getVerticalSize(15),
+  ),
+
+  child: Column(
+  children: [
+  _buildMyBookings(context),
+  Padding(
+  padding: EdgeInsets.only(
+  left: getHorizontalSize(16),
+  top: getVerticalSize(8),
+  right: getHorizontalSize(16)
+  ),
+  child: GridView.builder(
+  shrinkWrap: true,
+  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+  mainAxisExtent: getVerticalSize(200),
+  crossAxisCount: 2,
+  mainAxisSpacing: getHorizontalSize(13),
+  crossAxisSpacing: getHorizontalSize(13),
+  ),
+  physics: NeverScrollableScrollPhysics(),
+  itemCount: 1,
+  itemBuilder: (context, index) {
+  return FavoriteproductItemWidget(onTapProductItem: () {
+  onTapProductItem(context);
+  });
+  })),
+  ],
+  ),
+  )
+  )
+  );
+  }
+  );
+  }
+
+
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
+    return CustomAppBar(
+      //leadingWidth: 36.h,
+      leadingWidth: getHorizontalSize(44),
+      leading: AppbarLeadingImage(
+          //imagePath: ImageConstant.imgArrowDown2,
+          margin: EdgeInsets.only(
+              left: getHorizontalSize(12),
+              top: getVerticalSize(20),
+              bottom: getVerticalSize(20)
+            // left: 12.h,
+            // top: 20.v,
+            // bottom: 20.v,
+          ),
+          //onTap: () {
+            // onTapArrowDown(context);
+          // }
+          ),
+      centerTitle: true,
+      title: AppBarLogo(
+        height: 100,
+        width: 100,
+        imagePath: ImageConstant.imgAppBarLogo,
+        color: theme.colorScheme.primary,
+      ),
+      styleType: Style.bgFill,
+      //     actions: [
+      //   AppBarLogo(
+      //   height: 30,
+      //   width: 30,
+      //     svgPath: ImageConstant.imgOptionIcon,
+      // ),
+      // ],
+
+      //   actions: [
+      //   AppBarLogo(
+      //   height: 30,
+      //   width: 30,
+      //     svgPath: ImageConstant.imgOptionIcon,
+      //     color: theme.colorScheme.primary,
+      // ),
+      // ],
+
+        actions: [
+          AppBarLogo(
+            height: 30,
+            width: 30,
+            margin: getPadding(
+              right: 25,
+            ),
+
+            svgPath: ImageConstant.imgOptionIcon,
+            color: theme.colorScheme.primary,
+          )
+        ],
+    );
+  }
+
+  /// Section Widget
+
+  Widget _buildMyBookings(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        //horizontal: 23.h,
+        //vertical: 10.v,
+        horizontal: getHorizontalSize(23),
+        vertical: getVerticalSize(10),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        //mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(
+              left: getHorizontalSize(60),
+              top: getVerticalSize(3),
+            ),
+            child: Text(
+              "Ongoing",
+              style: AppStyle.txtManropeExtraBold18.copyWith(
+                letterSpacing: getHorizontalSize(0.2),
               ),
-
-                // options: AppBarLogo(
-                //   height: 20,
-                //   width: 20,
-                //   margin: getPadding(
-                //     left: 50,
-                //   ),
-                //   svgPath: ImageConstant.imgOptionIcon,
-                // ),
-
-                actions: [
-                  AppBarLogo(
-                    height: 30,
-                    width: 30,
-                    margin: getPadding(
-                      right: 25,
-                    ),
-
-                    svgPath: ImageConstant.imgOptionIcon,
-                  )
-
-                //   AppBarIconButton(
-                //     svgPath: ImageConstant.imgOptionIcon,
-                //     margin: getMargin(
-                //       left: 24,
-                //       //top: 10,
-                //       right: 24,
-                //     ),
-                //
-                //     onTap: (){
-                //       onTapOptions(context);
-                //     },
-                //   ),
-                ],
             ),
-
-            body: SizedBox(
-                width: size.width,
-                child: SingleChildScrollView(
-                    child: Padding(
-                        padding: getPadding(
-                          left: 24,
-                            //top: 32,
-                          top: 5,
-                          right: 24,
-                          bottom: 35,
-                        ),
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-                                  height: getVerticalSize(180),
-                                  width: getHorizontalSize(327),
-                                  margin: getMargin(top: 24),
-                                  child: Stack(
-                                      alignment: Alignment.topRight,
-                                      children: [
-                                        CustomImageView(
-                                          onTap: () {
-                                            onTapTopic1(context);
-                                          },
-
-                                          //imagePath: ImageConstant.imgImg418x3271,
-                                          //imagePath: ImageConstant.imgOptics420,
-                                          imagePath: ImageConstant.imgOptics420,
-                                          height: getVerticalSize(180),
-                                          width: getHorizontalSize(327),
-                                          radius: BorderRadius.circular(
-                                            getHorizontalSize(10),
-                                          ),
-                                          alignment: Alignment.center,
-                                        ),
-
-                                        CustomIconButton(
-                                            height: 36,
-                                            width: 36,
-                                            margin: getMargin(
-                                                top: 16,
-                                                right: 16
-                                            ),
-                                            variant: IconButtonVariant.OutlineBluegray50_1,
-                                            alignment: Alignment.topRight,
-                                            child: CustomImageView(
-                                                svgPath: ImageConstant.imgClock
-                                            )
-                                        )
-                                      ]
-                                  )
-                              ),
-                              Padding(
-                                  padding: getPadding(top: 10),
-                                  child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  onTapTopic1(context);
-                                                },
-
-                                                child: Text(
-                                                  "Topic 1",
-                                                  overflow: TextOverflow.ellipsis,
-                                                  textAlign: TextAlign.left,
-                                                  style: AppStyle.txtManropeExtraBold18.copyWith(
-                                                      letterSpacing: getHorizontalSize(0.2)
-                                                  ),
-                                                ),
-
-
-                                              ),
-                                            ]
-                                        ),
-                                      ]
-                                  )
-                              ),
-
-                              Container(
-                                  height: getVerticalSize(180),
-                                  width: getHorizontalSize(327),
-                                  margin: getMargin(top: 22),
-                                  child: Stack(
-                                      alignment: Alignment.topRight,
-                                      children: [
-                                        CustomImageView(
-                                          onTap: () {
-                                            onTapTopic2(context);
-                                          },
-
-                                          //imagePath: ImageConstant.imgImg180x3271,
-                                          //imagePath: ImageConstant.imgOptics,
-                                          imagePath: ImageConstant.imgOptics420,
-                                          height: getVerticalSize(180),
-                                          width: getHorizontalSize(327),
-                                          radius: BorderRadius.circular(
-                                              getHorizontalSize(10)
-                                          ),
-                                          alignment: Alignment.center,
-                                        ),
-                                        CustomIconButton(
-                                            height: 36,
-                                            width: 36,
-                                            margin: getMargin(
-                                                top: 16,
-                                                right: 16
-                                            ),
-                                            variant: IconButtonVariant.OutlineBluegray50_1,
-                                            alignment: Alignment.topRight,
-                                            child: CustomImageView(
-                                                svgPath: ImageConstant.imgClock
-                                            )
-                                        )
-                                      ]
-                                  )
-                              ),
-                              Padding(
-                                  padding: getPadding(top: 10),
-                                  child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  onTapTopic2(context);
-                                                },
-
-                                                child: Text(
-                                                  "Topic 2",
-                                                  overflow: TextOverflow.ellipsis,
-                                                  textAlign: TextAlign.left,
-                                                  style: AppStyle.txtManropeExtraBold18.copyWith(
-                                                    letterSpacing: getHorizontalSize(0.2),
-                                                  ),
-                                                ),
-
-                                              ),
-                                            ]
-                                        ),
-                                      ]
-                                  )
-                              ),
-
-                              Container(
-                                  height: getVerticalSize(180),
-                                  width: getHorizontalSize(327),
-                                  margin: getMargin(top: 22),
-                                  child: Stack(
-                                      alignment: Alignment.topRight,
-                                      children: [
-                                        CustomImageView(
-                                            onTap: () {
-                                              onTapTopic3(context);
-                                            },
-
-                                            //imagePath: ImageConstant.imgImg180x3272,
-                                            //imagePath: ImageConstant.imgOptics,
-                                            imagePath: ImageConstant.imgOptics420,
-                                            height: getVerticalSize(180),
-                                            width: getHorizontalSize(327),
-                                            radius: BorderRadius.circular(
-                                                getHorizontalSize(10)
-                                            ),
-                                            alignment: Alignment.center
-                                        ),
-                                        CustomIconButton(
-                                            height: 36,
-                                            width: 36,
-                                            margin: getMargin(
-                                                top: 16,
-                                                right: 16
-                                            ),
-                                            variant: IconButtonVariant.OutlineBluegray50_1,
-                                            alignment: Alignment.topRight,
-                                            child: CustomImageView(
-                                                svgPath: ImageConstant.imgClock
-                                            )
-                                        )
-                                      ]
-                                  ),
-                              ),
-                              Padding(
-                                  padding: getPadding(top: 10),
-                                  child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  onTapTopic3(context);
-                                                },
-
-                                                child: Text(
-                                                      "Topic 3",
-                                                      overflow: TextOverflow.ellipsis,
-                                                      textAlign: TextAlign.left,
-                                                      style: AppStyle.txtManropeExtraBold18.copyWith(
-                                                          letterSpacing: getHorizontalSize(0.2)
-                                                      )
-                                                  ),
-                                              ),
-                                            ]
-                                        ),
-                                      ],
-                                  ),
-                              ),
-                            ]
-
-                        )
-                    )
-                )
+          ),
+          Spacer(
+             flex: 1,
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+              right: getHorizontalSize(60),
+                top: getVerticalSize(3),
             ),
-        )
-      //),
+            child: Text(
+              "Completed",
+              style: AppStyle.txtManropeExtraBold18.copyWith(
+                letterSpacing: getHorizontalSize(0.2),
+              ),
+            ),
+          ),
+          // Spacer(
+          //   flex: 47,
+          // ),
+          // Padding(
+          //   padding: EdgeInsets.only(bottom: getVerticalSize(2)),
+          //   child: Text(
+          //     "Cancelled",
+          //     style: AppStyle.txtManropeExtraBold18.copyWith(
+          //         letterSpacing: getHorizontalSize(0.2),
+          //     ),
+          //   ),
+          // ),
+        ],
+      ),
     );
   }
 
@@ -319,10 +201,6 @@ class HomePage extends StatelessWidget {
     Navigator.pushNamed(context, AppRoute.next);
   }
 
-  onTapTopic1(BuildContext context) {
-    Navigator.pushNamed(context, AppRoute.topic_1);
-  }
-
   onTapTopic2(BuildContext context) {
     Navigator.pushNamed(context, AppRoute.topic_2);
   }
@@ -333,5 +211,9 @@ class HomePage extends StatelessWidget {
 
   onTapLogo(BuildContext context) {
     Navigator.pushNamed(context, AppRoute.home_Page);
+  }
+
+  onTapProductItem(BuildContext context) {
+    Navigator.pushNamed(context, AppRoute.topic_1);
   }
 }

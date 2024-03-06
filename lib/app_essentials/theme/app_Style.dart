@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trial_v3/app_essentials/utils/size_Utils.dart';
 import 'package:trial_v3/app_essentials/utils/color_Constant.dart';
+import 'package:trial_v3/app_essentials/theme/theme_Helper.dart';
 
 class AppStyle {
 
@@ -199,4 +200,50 @@ class AppStyle {
     fontWeight: FontWeight.w900,
   );
 
+  //lesson
+  static TextStyle txtManropeExtraBold20 = TextStyle(
+    color: ColorConstant.gray900,
+    fontSize: getFontSize(
+      20,
+    ),
+    fontFamily: 'Manrope',
+    fontWeight: FontWeight.w800,
+  );
+
+  static TextStyle txtManrope14gray700 = TextStyle(
+    color: ColorConstant.gray700,
+    fontSize: getFontSize(
+      14,
+    ),
+    fontFamily: 'Manrope',
+    fontWeight: FontWeight.w800,
+  );
+
+  static get titleMediumPlayfairDisplayPrimary =>
+      theme.textTheme.titleMedium!.playfairDisplay.copyWith(
+        color: theme.colorScheme.primary,
+        fontSize: getFontSize(24),
+        fontWeight: FontWeight.w900,
+      );
+
+}
+
+extension on TextStyle {
+  TextStyle get lato {
+    return copyWith(
+      fontFamily: 'Lato',
+    );
+  }
+
+  TextStyle get playfairDisplay {
+    return copyWith(
+      fontFamily: 'Playfair Display',
+    );
+  }
+
+  TextStyle get montserrat {
+    return copyWith(
+      fontFamily: 'Montserrat',
+    );
+  }
 }

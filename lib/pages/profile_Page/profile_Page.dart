@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trial_v3/app_essentials/tools/app_bar/app_Bar_Subtitle.dart';
 import 'package:trial_v3/app_essentials/tools/app_bar/app_Bar_Logo.dart';
-import 'package:trial_v3/app_essentials/tools/app_bar/custom_App_Bar.dart';
+//import 'package:trial_v3/app_essentials/tools/app_bar/custom_App_Bar.dart';
 import 'package:trial_v3/app_essentials/tools/custom_Icon_Button.dart';
 import 'package:trial_v3/app_essentials/utils/size_Utils.dart';
 import 'package:trial_v3/app_essentials/utils/color_Constant.dart';
@@ -9,6 +9,9 @@ import 'package:trial_v3/app_essentials/utils/image_Constants.dart';
 import 'package:trial_v3/app_essentials/tools/custom_Image_View.dart';
 import 'package:trial_v3/app_essentials/theme/app_Style.dart';
 import 'package:trial_v3/app_essentials/routes/app_route.dart';
+import 'package:trial_v3/app_essentials/tools/app_bar2/app_Bar_2.dart';
+import 'package:trial_v3/app_essentials/tools/app_bar2/app_Bar_Leading_Image.dart';
+import 'package:trial_v3/app_essentials/theme/theme_Helper.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -22,44 +25,45 @@ class ProfilePage extends StatelessWidget {
 
           child: Scaffold(
               backgroundColor: ColorConstant.gray50,
-              appBar: CustomAppBar(
-                  height: getVerticalSize(70),
-                  leadingWidth: 64,
-                  // leading: AppBarLogo(
-                  //     height: 100,
-                  //     width: 100,
-                  //     svgPath: ImageConstant.imgArrowleft,
-                  //     margin: getPadding(
-                  //       left: 25,
-                  //     ),
-                  //     onTap: () {
-                  //       onTapArrowleft15(context);
-                  //     }),
-                  title: AppBarLogo(
-                    height: 100,
-                    width: 100,
-                    margin: getPadding(
-                      left: 25,
-                    ),
-                    imagePath: ImageConstant.imgAppBarLogo,
-
-                    onTap: () {
-                      onTapLogo(context);
-                    },
-                  ),
-                  //centerTitle: true,
-                  //title: AppbarSubtitle(text: "Profile")
-                actions: [
-                AppBarLogo(
-                height: 30,
-                width: 30,
-                margin: getPadding(
-                  right: 25,
-                ),
-
-                svgPath: ImageConstant.imgOptionIcon,
-              )]
-              ),
+              // appBar: CustomAppBar(
+              //     height: getVerticalSize(70),
+              //     leadingWidth: 64,
+              //     // leading: AppBarLogo(
+              //     //     height: 100,
+              //     //     width: 100,
+              //     //     svgPath: ImageConstant.imgArrowleft,
+              //     //     margin: getPadding(
+              //     //       left: 25,
+              //     //     ),
+              //     //     onTap: () {
+              //     //       onTapArrowleft15(context);
+              //     //     }),
+              //     title: AppBarLogo(
+              //       height: 100,
+              //       width: 100,
+              //       margin: getPadding(
+              //         left: 25,
+              //       ),
+              //       imagePath: ImageConstant.imgAppBarLogo,
+              //
+              //       onTap: () {
+              //         onTapLogo(context);
+              //       },
+              //     ),
+              //     //centerTitle: true,
+              //     //title: AppbarSubtitle(text: "Profile")
+              //   actions: [
+              //   AppBarLogo(
+              //   height: 30,
+              //   width: 30,
+              //   margin: getPadding(
+              //     right: 25,
+              //   ),
+              //
+              //   svgPath: ImageConstant.imgOptionIcon,
+              // )]
+              // ),
+              appBar: _buildAppBar(context),
               body: Container(
                   width: double.maxFinite,
                   padding: getPadding(
@@ -125,61 +129,61 @@ class ProfilePage extends StatelessWidget {
                         ),
 
                         // favorites
-                        GestureDetector(
-                            onTap: () {
-                              onTapFavorite(context);
-                            },
-
-                            child: Padding(
-                                padding: getPadding(top: 16),
-
-                                child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-
-                                      CustomIconButton(
-                                          height: 40,
-                                          width: 40,
-                                          variant: IconButtonVariant.FillBluegray50,
-                                          shape: IconButtonShape.RoundedBorder10,
-                                          padding: IconButtonPadding.PaddingAll12,
-                                          child: CustomImageView(
-                                              svgPath: ImageConstant.imgLocation40x40
-                                          )
-
-
-                                      ),
-
-                                      Padding(
-                                          padding: getPadding(
-                                              left: 16,
-                                              top: 12,
-                                              bottom: 7
-                                          ),
-                                          child: Text(
-                                              "My favorites",
-                                              overflow: TextOverflow.ellipsis,
-                                              textAlign: TextAlign.left,
-                                              style: AppStyle.txtManropeSemiBold14Gray900
-                                          )
-                                      ),
-
-                                      const Spacer(),
-
-                                      CustomImageView(
-                                          svgPath: ImageConstant.imgArrowrightBlueGray500,
-                                          height: getSize(20),
-                                          width: getSize(20),
-                                          margin: getMargin(
-                                              top: 10,
-                                              bottom: 10
-                                          )
-                                      ),
-
-                                    ]
-                                )
-                            )
-                        ),
+                        // GestureDetector(
+                        //     onTap: () {
+                        //       onTapFavorite(context);
+                        //     },
+                        //
+                        //     child: Padding(
+                        //         padding: getPadding(top: 16),
+                        //
+                        //         child: Row(
+                        //             mainAxisAlignment: MainAxisAlignment.center,
+                        //             children: [
+                        //
+                        //               CustomIconButton(
+                        //                   height: 40,
+                        //                   width: 40,
+                        //                   variant: IconButtonVariant.FillBluegray50,
+                        //                   shape: IconButtonShape.RoundedBorder10,
+                        //                   padding: IconButtonPadding.PaddingAll12,
+                        //                   child: CustomImageView(
+                        //                       svgPath: ImageConstant.imgLocation40x40
+                        //                   )
+                        //
+                        //
+                        //               ),
+                        //
+                        //               Padding(
+                        //                   padding: getPadding(
+                        //                       left: 16,
+                        //                       top: 12,
+                        //                       bottom: 7
+                        //                   ),
+                        //                   child: Text(
+                        //                       "My favorites",
+                        //                       overflow: TextOverflow.ellipsis,
+                        //                       textAlign: TextAlign.left,
+                        //                       style: AppStyle.txtManropeSemiBold14Gray900
+                        //                   )
+                        //               ),
+                        //
+                        //               const Spacer(),
+                        //
+                        //               CustomImageView(
+                        //                   svgPath: ImageConstant.imgArrowrightBlueGray500,
+                        //                   height: getSize(20),
+                        //                   width: getSize(20),
+                        //                   margin: getMargin(
+                        //                       top: 10,
+                        //                       bottom: 10
+                        //                   )
+                        //               ),
+                        //
+                        //             ]
+                        //         )
+                        //     )
+                        // ),
 
                         // edit profile
                         GestureDetector(
@@ -300,6 +304,41 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
+    return CustomAppBar(
+      //leadingWidth: 36.h,
+      leadingWidth: getHorizontalSize(44),
+      leading: AppbarLeadingImage(
+          imagePath: ImageConstant.imgArrowDown2,
+          margin: EdgeInsets.only(
+              left: getHorizontalSize(12),
+              top: getVerticalSize(20),
+              bottom: getVerticalSize(20)
+            // left: 12.h,
+            // top: 20.v,
+            // bottom: 20.v,
+          ),
+          onTap: () {
+            onTapArrowDown(context);
+          }),
+      centerTitle: true,
+      title: AppBarLogo(
+        height: 100,
+        width: 100,
+        imagePath: ImageConstant.imgAppBarLogo,
+        color: theme.colorScheme.primary,
+      ),
+      styleType: Style.bgFill,
+      //     actions: [
+      //   AppBarLogo(
+      //   height: 30,
+      //   width: 30,
+      //     svgPath: ImageConstant.imgOptionIcon,
+      // ),
+      // ],
+    );
+  }
+
   onTapBtnEdit(BuildContext context) {
     Navigator.pushNamed(context, AppRoute.next);
   }
@@ -329,6 +368,10 @@ class ProfilePage extends StatelessWidget {
   }
 
   onTapLogo(BuildContext context) {
+    Navigator.pushNamed(context, AppRoute.home_Page);
+  }
+
+  onTapArrowDown(BuildContext context) {
     Navigator.pushNamed(context, AppRoute.home_Page);
   }
 }
